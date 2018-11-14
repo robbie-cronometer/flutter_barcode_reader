@@ -8,6 +8,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.Registrar
+import android.content.Context
 
 class BarcodeScanPlugin(val activity: Activity): MethodCallHandler,
     PluginRegistry.ActivityResultListener {
@@ -40,6 +41,18 @@ class BarcodeScanPlugin(val activity: Activity): MethodCallHandler,
     if (code == 100) {
       if (resultCode == Activity.RESULT_OK) {
         val barcode = data?.getStringExtra("SCAN_RESULT")
+        if (barcode != null) {
+            val sharedPreferences = activity.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            val jsonString = """
+            {
+               "from":"BarcodeScanner",
+               "data":""" + barcode + """"
+            }        
+            """
+            editor.putString("flutter.external_result", jsonString)
+            editor.apply()
+        }  
         barcode?.let { this.result?.success(barcode) }
       } else {
         val errorCode = data?.getStringExtra("ERROR_CODE")
