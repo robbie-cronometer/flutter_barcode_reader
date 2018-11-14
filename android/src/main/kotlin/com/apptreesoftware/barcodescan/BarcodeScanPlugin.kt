@@ -47,7 +47,7 @@ class BarcodeScanPlugin(val activity: Activity): MethodCallHandler,
             val jsonString = """
             {
                "from":"BarcodeScanner",
-               "data":""" + barcode + """"
+               "data":" """ + barcode + """"
             }        
             """
             editor.putString("flutter.external_result", jsonString)
