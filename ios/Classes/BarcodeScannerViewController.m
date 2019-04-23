@@ -4,6 +4,7 @@
 
 #import "BarcodeScannerViewController.h"
 #import <MTBBarcodeScanner/MTBBarcodeScanner.h>
+#import <AVFoundation/AVFoundation.h>
 #import "ScannerOverlay.h"
 
 
@@ -41,7 +42,8 @@
                              metrics:nil
                              views:@{@"scanRect": _scanRect}]];
   [_scanRect startAnimating];
-    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:_previewView];
+    self.scanner = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeCode128Code,AVMetadataObjectTypeCode39Code,AVMetadataObjectTypeCode39Mod43Code,AVMetadataObjectTypeCode93Code,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeEAN8Code,AVMetadataObjectTypeInterleaved2of5Code,AVMetadataObjectTypeITF14Code,AVMetadataObjectTypePDF417Code,AVMetadataObjectTypeUPCECode]
+                                               previewView:_previewView];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
   [self updateFlashButton];
 }

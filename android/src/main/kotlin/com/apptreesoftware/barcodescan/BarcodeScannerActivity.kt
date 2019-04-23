@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import com.google.zxing.Result
+import com.google.zxing.BarcodeFormat
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 
@@ -27,6 +28,25 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
         super.onCreate(savedInstanceState)
         title = ""
         scannerView = ZXingScannerView(this)
+        var formats : ArrayList<BarcodeFormat> = ArrayList()
+
+        // exclude QR Code, Aztec, Data Matrix and Maxicode
+        formats.add(BarcodeFormat.CODABAR)
+        formats.add(BarcodeFormat.CODE_39)
+        formats.add(BarcodeFormat.CODE_93)
+        formats.add(BarcodeFormat.CODE_128)
+        formats.add(BarcodeFormat.EAN_8);
+        formats.add(BarcodeFormat.EAN_13)
+        formats.add(BarcodeFormat.ITF)
+        formats.add(BarcodeFormat.PDF_417)
+        formats.add(BarcodeFormat.QR_CODE)
+        formats.add(BarcodeFormat.RSS_14)
+        formats.add(BarcodeFormat.RSS_EXPANDED)
+        formats.add(BarcodeFormat.UPC_A)
+        formats.add(BarcodeFormat.UPC_E)
+        formats.add(BarcodeFormat.UPC_EAN_EXTENSION)
+
+        scannerView.setFormats(formats)
         scannerView.setAutoFocus(true)
         setContentView(scannerView)
     }
