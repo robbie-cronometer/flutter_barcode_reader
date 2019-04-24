@@ -35,7 +35,7 @@ class BarcodeScannerActivity : Activity(), ZXingScannerView.ResultHandler {
         formats.add(BarcodeFormat.CODE_39)
         formats.add(BarcodeFormat.CODE_93)
         formats.add(BarcodeFormat.CODE_128)
-        formats.add(BarcodeFormat.EAN_8);
+        formats.add(BarcodeFormat.EAN_8)
         formats.add(BarcodeFormat.EAN_13)
         formats.add(BarcodeFormat.ITF)
         formats.add(BarcodeFormat.PDF_417)
